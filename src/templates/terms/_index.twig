@@ -1,0 +1,17 @@
+{% extends "_layouts/elementindex" %}
+
+{% set title = "Glossary Terms"|t('ckeditor-glossary') %}
+{% set elementType = 'littlemissrobot\\ckeditorglossary\\elements\\GlossaryTerm' %}
+
+{% block actionButton %}
+    {% if currentUser.can('ckeditor-glossary:manage-terms') %}
+        <form method="post" accept-charset="UTF-8" class="ckeditor-glossary-new">
+            {{ csrfInput() }}
+            {{ actionInput('elements/create') }}
+            {{ hiddenInput('elementType', elementType) }}
+            <button type="submit" class="btn submit add icon">
+                {{ "New glossary term"|t('ckeditor-glossary') }}
+            </button>
+        </form>
+    {% endif %}
+{% endblock %}

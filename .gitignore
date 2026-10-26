@@ -1,0 +1,10 @@
+/vendor
+node_modules/
+composer.lock
+package-lock.json
+.DS_Store
+.idea
+.phpunit.result.cache
+
+# CKEditor package build artifacts are generated from ckeditor5-glossary/ via `npm run build`.
+# They are committed so the plugin works without a Node toolchain; see ckeditor5-glossary/README.md.

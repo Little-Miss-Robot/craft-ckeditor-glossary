@@ -1,0 +1,76 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% set title = "CKEditor Glossary"|t('ckeditor-glossary') %}
+{% set fullPageForm = true %}
+{% set selectedSubnavItem = 'settings' %}
+
+{% set crumbs = [
+    { label: "Glossary"|t('ckeditor-glossary'), url: url('ckeditor-glossary') },
+] %}
+
+{% block content %}
+    {{ actionInput('ckeditor-glossary/settings/save') }}
+    {{ redirectInput('ckeditor-glossary/settings') }}
+
+    <h2>{{ "Tooltips"|t('ckeditor-glossary') }}</h2>
+
+    {{ forms.textField({
+        label: "Tooltip field handle"|t('ckeditor-glossary'),
+        instructions: "Optional. A custom field handle on the term to use for the tooltip (e.g. a CKEditor field for rich definitions). Leave blank to use the plain-text Definition."|t('ckeditor-glossary'),
+        id: 'tooltipFieldHandle',
+        name: 'tooltipFieldHandle',
+        value: settings.tooltipFieldHandle,
+        placeholder: 'glossaryBody',
+    }) }}
+
+    {{ forms.textField({
+        label: "Cache duration"|t('ckeditor-glossary'),
+        instructions: "How long (in seconds) a resolved definition is cached for the front-end API. 0 = cache until a term changes."|t('ckeditor-glossary'),
+        type: 'number',
+        id: 'cacheDuration',
+        name: 'cacheDuration',
+        value: settings.cacheDuration,
+        min: 0,
+    }) }}
+
+    {{ forms.lightswitchField({
+        label: "Autoload tooltip assets"|t('ckeditor-glossary'),
+        instructions: "Automatically include the tooltip CSS/JS on every front-end page. Leave off to include them yourself with {code}."|t('ckeditor-glossary', { code: '{% do craft.ckeditorGlossary.registerTooltipAssets() %}' }),
+        id: 'autoloadTooltipAssets',
+        name: 'autoloadTooltipAssets',
+        on: settings.autoloadTooltipAssets,
+    }) }}
+
+    <hr>
+
+    <h2>{{ "Detail pages"|t('ckeditor-glossary') }}</h2>
+    <p class="light">{{ "Give glossary terms their own URLs per site. Leave the URI format blank to keep terms link-only."|t('ckeditor-glossary') }}</p>
+
+    {% for site in craft.app.sites.getAllSites() %}
+        <div class="field">
+            <div class="heading"><label>{{ site.name }}</label></div>
+            <div class="flex">
+                {{ forms.text({
+                    name: "siteSettings[#{site.uid}][uriFormat]",
+                    value: settings.siteSettings[site.uid].uriFormat ?? '',
+                    placeholder: 'glossary/{slug}',
+                }) }}
+                {{ forms.text({
+                    name: "siteSettings[#{site.uid}][template]",
+                    value: settings.siteSettings[site.uid].template ?? '',
+                    placeholder: 'glossary/_term',
+                }) }}
+            </div>
+        </div>
+    {% endfor %}
+
+    <hr>
+
+    <h2>{{ "Term fields"|t('ckeditor-glossary') }}</h2>
+    <p class="light">{{ "Arrange the fields shown when editing a glossary term. Add rich-content fields here for detail pages."|t('ckeditor-glossary') }}</p>
+
+    {{ forms.fieldLayoutDesignerField({
+        fieldLayout: fieldLayout,
+    }) }}
+{% endblock %}

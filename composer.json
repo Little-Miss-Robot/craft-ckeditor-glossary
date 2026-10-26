@@ -1,0 +1,61 @@
+{
+    "name": "little-miss-robot/craft-ckeditor-glossary",
+    "description": "Link words in CKEditor content to glossary terms and show their definitions in accessible front-end tooltips.",
+    "version": "1.0.0",
+    "type": "craft-plugin",
+    "license": "MIT",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "ckeditor",
+        "glossary",
+        "tooltip",
+        "taxonomy"
+    ],
+    "support": {
+        "email": "info@littlemissrobot.com",
+        "issues": "https://github.com/Little-Miss-Robot/craft-ckeditor-glossary/issues",
+        "source": "https://github.com/Little-Miss-Robot/craft-ckeditor-glossary",
+        "docs": "https://github.com/Little-Miss-Robot/craft-ckeditor-glossary"
+    },
+    "require": {
+        "php": "^8.2",
+        "craftcms/cms": "^5.9.0",
+        "craftcms/ckeditor": "^5.0.0"
+    },
+    "require-dev": {
+        "craftcms/ecs": "dev-main",
+        "craftcms/phpstan": "dev-main",
+        "phpstan/phpstan": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "littlemissrobot\\ckeditorglossary\\": "src/"
+        }
+    },
+    "extra": {
+        "handle": "ckeditor-glossary",
+        "name": "CKEditor Glossary",
+        "developer": "Little Miss Robot",
+        "developerUrl": "https://www.littlemissrobot.com",
+        "documentationUrl": "https://github.com/Little-Miss-Robot/craft-ckeditor-glossary",
+        "class": "littlemissrobot\\ckeditorglossary\\CkeditorGlossary"
+    },
+    "scripts": {
+        "check-cs": "ecs check --ansi",
+        "fix-cs": "ecs check --ansi --fix",
+        "phpstan": "phpstan --memory-limit=1G"
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

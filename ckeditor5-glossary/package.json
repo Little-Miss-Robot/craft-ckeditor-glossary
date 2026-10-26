@@ -1,0 +1,19 @@
+{
+  "name": "@littlemissrobot/ckeditor5-glossary",
+  "version": "1.0.0",
+  "description": "CKEditor 5 glossary-link plugin for the Craft CMS CKEditor Glossary plugin.",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --format=esm --external:ckeditor5 --legal-comments=none --outfile=../src/web/assets/glossary/build/glossary.js",
+    "watch": "npm run build -- --watch"
+  },
+  "peerDependencies": {
+    "ckeditor5": ">=44.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
